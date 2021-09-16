@@ -1,0 +1,12 @@
+name: Fishing
+version: ${project.version}
+main: dev.lightdream.fishing.Main
+authors: [ L1ghtDream ]
+website: https://lightdream.dev
+softdepend:
+  - LightDreamAPI
+commands:
+  fish:
+    description: NA
+  ld-api:
+    description: NA
