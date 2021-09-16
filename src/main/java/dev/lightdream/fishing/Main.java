@@ -21,6 +21,7 @@ import java.util.HashMap;
 public final class Main extends LightDreamPlugin {
 
     public static Main instance;
+    public DatabaseManager databaseManager;
 
     //Settings
     public Config config;
@@ -28,12 +29,13 @@ public final class Main extends LightDreamPlugin {
 
     @Override
     public void onEnable() {
-        init("Fishing", "fish", "1.1");
+        init("Fishing", "fish", "1.2");
         instance = this;
 
         new EventManager(this);
 
         fileManager.registerModule(new SimpleModule().addKeyDeserializer(Loot.class, getKeyDeserializerManager()));
+        databaseManager = new DatabaseManager(this);
     }
 
 
@@ -85,7 +87,7 @@ public final class Main extends LightDreamPlugin {
 
     @Override
     public DatabaseManager getDatabaseManager() {
-        return new DatabaseManager(this);
+        return databaseManager;
     }
 
     @Override
