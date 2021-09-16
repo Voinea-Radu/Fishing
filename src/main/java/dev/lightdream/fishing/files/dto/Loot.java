@@ -5,6 +5,7 @@ import dev.lightdream.api.files.dto.Item;
 import dev.lightdream.api.files.dto.Serializable;
 import dev.lightdream.api.utils.MessageBuilder;
 import dev.lightdream.fishing.Main;
+import gnu.trove.impl.hash.TDoubleCharHash;
 import org.bukkit.Bukkit;
 
 import java.util.HashMap;
@@ -12,37 +13,42 @@ import java.util.Objects;
 
 public class Loot extends Serializable implements java.io.Serializable {
 
-    //todo key deserializer
     public String type;
     public Item item;
     public double money;
     public int xp;
     public Fish fish;
     public String command;
+    public double chance;
 
-    public Loot(Item item) {
+    public Loot(Item item, double chance) {
         this.item = item;
         this.type = "item";
+        this.chance = chance;
     }
 
-    public Loot(double money) {
+    public Loot(double money, double chance) {
         this.money = money;
         this.type = "money";
+        this.chance = chance;
     }
 
-    public Loot(int xp) {
+    public Loot(int xp, double chance) {
         this.xp = xp;
         this.type = "xp";
+        this.chance =chance;
     }
 
-    public Loot(Fish fish) {
+    public Loot(Fish fish, double chance) {
         this.fish = fish;
         this.type = "fish";
+        this.chance = chance;
     }
 
-    public Loot(String command) {
+    public Loot(String command, double chance) {
         this.command = command;
         this.type = "command";
+        this.chance = chance;
     }
 
     @Override
