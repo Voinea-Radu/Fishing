@@ -27,9 +27,9 @@ public class EventManager implements Listener {
         //}
 
         User user = Main.instance.databaseManager.getUser(event.getPlayer());
-        Loot loot = Main.instance.config.getRandomLoot();
+        Loot loot = Main.instance.config.randomLoot();
         loot.giveLoot(user);
-        Main.instance.getMessageManager().sendMessage(user, new MessageBuilder(loot.getCatchText()).addPlaceholders(new HashMap<String, String>() {{
+        Main.instance.getMessageManager().sendMessage(user, new MessageBuilder(loot.catchText()).addPlaceholders(new HashMap<String, String>() {{
             put("item", loot.item == null ? "" : loot.item.displayName);
             put("count", loot.item == null ? "" : String.valueOf(loot.item.amount));
             put("money_amount", String.valueOf(loot.money));

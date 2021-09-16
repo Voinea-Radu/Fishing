@@ -91,7 +91,7 @@ public class Loot extends Serializable implements java.io.Serializable {
         }
     }
 
-    public String getCatchText(){
+    public String catchText(){
             switch (type) {
                 case "item":
                     return Main.instance.lang.itemCatch;

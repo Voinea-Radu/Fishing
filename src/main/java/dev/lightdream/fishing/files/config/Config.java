@@ -46,7 +46,7 @@ public class Config extends dev.lightdream.api.files.config.Config {
         put(Fish.FishRarity.LEGENDARY, new Fish.FishConfig(3.0, 5));
     }};
 
-    public Loot getRandomLoot() {
+    public Loot randomLoot() {
         AtomicReference<Double> maxChances = new AtomicReference<>(0.0);
         lootTable.forEach((loot, chance) -> maxChances.updateAndGet(v -> v + chance));
         double rnd = Utils.generateRandom(0, maxChances.get());
@@ -62,6 +62,7 @@ public class Config extends dev.lightdream.api.files.config.Config {
         return null;
     }
 
+    /*
     public Fish.FishType getRandomFish() {
         AtomicReference<Double> maxChances = new AtomicReference<>(0.0);
         fishes.forEach((loot, config) -> maxChances.updateAndGet(v -> v + config.chance));
@@ -93,5 +94,6 @@ public class Config extends dev.lightdream.api.files.config.Config {
         }
         return null;
     }
+     */
 
 }

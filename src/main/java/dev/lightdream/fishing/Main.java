@@ -8,8 +8,10 @@ import dev.lightdream.api.managers.MessageManager;
 import dev.lightdream.fishing.commands.SellCommand;
 import dev.lightdream.fishing.files.config.Config;
 import dev.lightdream.fishing.files.config.Lang;
+import dev.lightdream.fishing.files.dto.Loot;
 import dev.lightdream.fishing.manager.DatabaseManager;
 import dev.lightdream.fishing.manager.EventManager;
+import dev.lightdream.libs.fasterxml.databind.module.SimpleModule;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +32,8 @@ public final class Main extends LightDreamPlugin {
         instance = this;
 
         new EventManager(this);
+
+        fileManager.registerModule(new SimpleModule().addKeyDeserializer(Loot.class, getKeyDeserializerManager()));
     }
 
 
