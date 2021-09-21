@@ -22,6 +22,10 @@ public class SellCommand extends Command {
     @Override
     public void execute(CommandSender commandSender, List<String> list) {
         User user = api.getDatabaseManager().getUser(commandSender);
+
+        if (user == null || user.getPlayer() == null || user.getPlayer().getItemInHand() == null) {
+            return;
+        }
         Fish fish = Fish.of(user.getPlayer().getItemInHand());
         if (fish == null) {
             api.getMessageManager().sendMessage(user, Main.instance.lang.invalidFish);

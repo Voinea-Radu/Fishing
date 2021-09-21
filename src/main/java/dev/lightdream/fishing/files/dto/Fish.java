@@ -6,7 +6,6 @@ import dev.lightdream.api.files.dto.XMaterial;
 import dev.lightdream.api.utils.MessageBuilder;
 import dev.lightdream.api.utils.NbtUtils;
 import dev.lightdream.fishing.Main;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.bukkit.inventory.ItemStack;
 
@@ -67,19 +66,24 @@ public class Fish {
             put("rarity", rarity.toString());
         }}).parse();
 
+        if (user.getPlayer() == null) {
+            return;
+        }
         user.getPlayer().getInventory().addItem(item.parseItem());
     }
 
     public double sell(User user) {
-        double price = Main.instance.config.fishes.get(type).amount;
+        double price = Main.instance.config.fishes.get(type);
         if (cooked) {
             price *= Main.instance.config.cookedVersionMultiplier;
         }
-        price *= Main.instance.config.fishRarities.get(rarity).amount;
+        price *= Main.instance.config.fishRarities.get(rarity);
         price *= amount;
         user.addMoney(price);
+        if (user.getPlayer() == null) {
+            return 0;
+        }
         user.getPlayer().setItemInHand(null);
-        //itemStack.setType(Material.AIR);
         return price;
     }
 
@@ -115,12 +119,5 @@ public class Fish {
         EPIC,
         LEGENDARY
 
-    }
-
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class FishConfig {
-        public double amount;
-        public double chance;
     }
 }

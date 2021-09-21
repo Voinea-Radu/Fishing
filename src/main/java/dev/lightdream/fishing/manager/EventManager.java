@@ -4,6 +4,7 @@ import dev.lightdream.api.databases.User;
 import dev.lightdream.api.utils.MessageBuilder;
 import dev.lightdream.fishing.Main;
 import dev.lightdream.fishing.files.dto.Loot;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 
 public class EventManager implements Listener {
 
+    @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private final Main plugin;
 
     public EventManager(Main plugin) {
@@ -21,14 +23,16 @@ public class EventManager implements Listener {
 
     @EventHandler
     public void onFish(PlayerFishEvent event) {
-        //todo remove the comments
-        //if(!event.getState().equals(PlayerFishEvent.State.CAUGHT_FISH)){
-        //    return;
-        //}
+        if (!event.getState().equals(PlayerFishEvent.State.CAUGHT_FISH)) {
+            return;
+        }
 
         User user = Main.instance.databaseManager.getUser(event.getPlayer());
-        Loot loot = Main.instance.config.randomLoot();
-        System.out.println(loot);
+
+        if(user.getPlayer()==null){
+            return;
+        }
+        Loot loot = Main.instance.config.randomLoot(user.getPlayer().getItemInHand().getEnchantments().getOrDefault(Enchantment.LUCK, 0));
         loot.giveLoot(user);
         Main.instance.getMessageManager().sendMessage(user, new MessageBuilder(loot.catchText()).addPlaceholders(new HashMap<String, String>() {{
             put("item", loot.item == null ? "" : loot.item.displayName);

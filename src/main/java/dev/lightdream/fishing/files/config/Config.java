@@ -14,11 +14,11 @@ import java.util.concurrent.atomic.AtomicReference;
 public class Config extends dev.lightdream.api.files.config.Config {
 
     public List<Loot> lootTable = Arrays.asList(
-            new Loot(new Item(XMaterial.STONE), 100.0),
-            new Loot(100.0, 100.0),
-            new Loot(100, 100.0),
-            new Loot(new Fish(Fish.FishType.COD, Fish.FishRarity.COMMON, false), 100.0),
-            new Loot("say Hello", 100.0)
+            new Loot(new Item(XMaterial.STONE), Arrays.asList(100.0, 100.0, 100.0, 100.0)),
+            new Loot(100.0, Arrays.asList(100.0, 100.0, 100.0, 100.0)),
+            new Loot(100, Arrays.asList(100.0, 100.0, 100.0, 100.0)),
+            new Loot(new Fish(Fish.FishType.COD, Fish.FishRarity.COMMON, false), Arrays.asList(100.0, 100.0, 100.0, 100.0)),
+            new Loot("say Hello", Arrays.asList(100.0, 100.0, 100.0, 100.0))
     );
 
     public List<String> fishLootLore = Arrays.asList(
@@ -29,31 +29,30 @@ public class Config extends dev.lightdream.api.files.config.Config {
             "it is going to lose its value on market"
     );
 
-    public HashMap<Fish.FishType, Fish.FishConfig> fishes = new HashMap<Fish.FishType, Fish.FishConfig>() {{
-        put(Fish.FishType.TROPICAL, new Fish.FishConfig(1000.0, 25));
-        put(Fish.FishType.COD, new Fish.FishConfig(1000.0, 25));
-        put(Fish.FishType.PUFFERFISH, new Fish.FishConfig(1000.0, 25));
-        put(Fish.FishType.SALMON, new Fish.FishConfig(1000.0, 25));
+    public HashMap<Fish.FishType, Double> fishes = new HashMap<Fish.FishType, Double>() {{
+        put(Fish.FishType.TROPICAL, 1000.0);
+        put(Fish.FishType.COD, 1000.0);
+        put(Fish.FishType.PUFFERFISH, 1000.0);
+        put(Fish.FishType.SALMON, 1000.0);
     }};
 
     public Double cookedVersionMultiplier = 2.0;
 
-    public HashMap<Fish.FishRarity, Fish.FishConfig> fishRarities = new HashMap<Fish.FishRarity, Fish.FishConfig>() {{
-        put(Fish.FishRarity.COMMON, new Fish.FishConfig(1.0, 40));
-        put(Fish.FishRarity.UNCOMMON, new Fish.FishConfig(1.5, 30));
-        put(Fish.FishRarity.RARE, new Fish.FishConfig(2.0, 15));
-        put(Fish.FishRarity.EPIC, new Fish.FishConfig(2.5, 10));
-        put(Fish.FishRarity.LEGENDARY, new Fish.FishConfig(3.0, 5));
+    public HashMap<Fish.FishRarity, Double> fishRarities = new HashMap<Fish.FishRarity, Double>() {{
+        put(Fish.FishRarity.COMMON, 1.0);
+        put(Fish.FishRarity.UNCOMMON, 1.5);
+        put(Fish.FishRarity.RARE, 2.0);
+        put(Fish.FishRarity.EPIC, 2.5);
+        put(Fish.FishRarity.LEGENDARY, 3.0);
     }};
 
-    public Loot randomLoot() {
+    public Loot randomLoot(int luckOfTheSea) {
         AtomicReference<Double> maxChances = new AtomicReference<>(0.0);
-        lootTable.forEach(loot -> maxChances.updateAndGet(v -> v + loot.chance));
-        //lootTable.forEach((loot, chance) -> maxChances.updateAndGet(v -> v + chance));
+        lootTable.forEach(loot -> maxChances.updateAndGet(v -> v + loot.chance.get(luckOfTheSea)));
         double rnd = Utils.generateRandom(0, maxChances.get());
 
         for (Loot loot : lootTable) {
-            double chance = loot.chance;
+            double chance = loot.chance.get(luckOfTheSea);
             if (rnd <= chance) {
                 return loot;
             } else {
@@ -62,39 +61,4 @@ public class Config extends dev.lightdream.api.files.config.Config {
         }
         return null;
     }
-
-    /*
-    public Fish.FishType getRandomFish() {
-        AtomicReference<Double> maxChances = new AtomicReference<>(0.0);
-        fishes.forEach((loot, config) -> maxChances.updateAndGet(v -> v + config.chance));
-        double rnd = Utils.generateRandom(0, maxChances.get());
-
-        for (Fish.FishType fishType : fishes.keySet()) {
-            Fish.FishConfig config = fishes.get(fishType);
-            if (config.chance <= rnd) {
-                return fishType;
-            } else {
-                rnd -= config.chance;
-            }
-        }
-        return null;
-    }
-
-    public Fish.FishRarity getRandomRarity() {
-        AtomicReference<Double> maxChances = new AtomicReference<>(0.0);
-        fishRarities.forEach((loot, config) -> maxChances.updateAndGet(v -> v + config.chance));
-        double rnd = Utils.generateRandom(0, maxChances.get());
-
-        for (Fish.FishRarity fishRarity : fishRarities.keySet()) {
-            Fish.FishConfig config = fishRarities.get(fishRarity);
-            if (config.chance <= rnd) {
-                return fishRarity;
-            } else {
-                rnd -= config.chance;
-            }
-        }
-        return null;
-    }
-     */
-
 }
