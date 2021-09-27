@@ -4,10 +4,14 @@ import dev.lightdream.api.databases.User;
 import dev.lightdream.api.utils.MessageBuilder;
 import dev.lightdream.fishing.Main;
 import dev.lightdream.fishing.files.dto.Loot;
+import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 
@@ -42,7 +46,20 @@ public class EventManager implements Listener {
             put("fish", loot.fish == null ? "" : loot.fish.type.toString());
             put("rarity", loot.fish == null ? "" : loot.fish.rarity.toString());
         }}));
+        ItemStack is = user.getPlayer().getItemInHand();
+        user.getPlayer().setItemInHand(null);
+        Bukkit.getScheduler().runTaskLater(plugin,()->user.getPlayer().setItemInHand(is),1);
         event.setCancelled(true);
+    }
+
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onMessageSend(AsyncPlayerChatEvent event){
+        if(event.getMessage().startsWith("/fish sell")){
+            if(event.getPlayer().hasPermission("fish.sell.bypass")){
+                event.setCancelled(false);
+            }
+        }
     }
 
 

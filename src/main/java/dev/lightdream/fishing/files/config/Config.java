@@ -1,7 +1,7 @@
 package dev.lightdream.fishing.files.config;
 
-import dev.lightdream.api.files.dto.Item;
-import dev.lightdream.api.files.dto.XMaterial;
+import dev.lightdream.api.dto.Item;
+import dev.lightdream.api.dto.XMaterial;
 import dev.lightdream.api.utils.Utils;
 import dev.lightdream.fishing.files.dto.Fish;
 import dev.lightdream.fishing.files.dto.Loot;
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class Config extends dev.lightdream.api.files.config.Config {
+public class Config extends dev.lightdream.api.conifgs.Config {
 
     public List<Loot> lootTable = Arrays.asList(
             new Loot(new Item(XMaterial.STONE), Arrays.asList(100.0, 100.0, 100.0, 100.0)),

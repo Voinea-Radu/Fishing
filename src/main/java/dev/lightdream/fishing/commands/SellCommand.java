@@ -1,7 +1,7 @@
 package dev.lightdream.fishing.commands;
 
 import dev.lightdream.api.IAPI;
-import dev.lightdream.api.commands.Command;
+import dev.lightdream.api.commands.SubCommand;
 import dev.lightdream.api.databases.User;
 import dev.lightdream.api.utils.MessageBuilder;
 import dev.lightdream.fishing.Main;
@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class SellCommand extends Command {
+public class SellCommand extends SubCommand {
     public SellCommand(@NotNull IAPI api) {
         super(api, Collections.singletonList("sell"), "", "", true, false, "");
     }

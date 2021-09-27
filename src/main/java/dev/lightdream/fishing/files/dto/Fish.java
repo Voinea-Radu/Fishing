@@ -1,8 +1,8 @@
 package dev.lightdream.fishing.files.dto;
 
 import dev.lightdream.api.databases.User;
-import dev.lightdream.api.files.dto.Item;
-import dev.lightdream.api.files.dto.XMaterial;
+import dev.lightdream.api.dto.Item;
+import dev.lightdream.api.dto.XMaterial;
 import dev.lightdream.api.utils.MessageBuilder;
 import dev.lightdream.api.utils.NbtUtils;
 import dev.lightdream.fishing.Main;

@@ -2,8 +2,8 @@ package dev.lightdream.fishing;
 
 import dev.lightdream.api.API;
 import dev.lightdream.api.LightDreamPlugin;
+import dev.lightdream.api.conifgs.SQLConfig;
 import dev.lightdream.api.databases.User;
-import dev.lightdream.api.files.config.SQLConfig;
 import dev.lightdream.api.managers.MessageManager;
 import dev.lightdream.fishing.commands.SellCommand;
 import dev.lightdream.fishing.files.config.Config;
@@ -29,7 +29,7 @@ public final class Main extends LightDreamPlugin {
 
     @Override
     public void onEnable() {
-        init("Fishing", "fish", "1.3");
+        init("Fishing", "fish", "1.4");
         instance = this;
 
         new EventManager(this);
@@ -59,8 +59,13 @@ public final class Main extends LightDreamPlugin {
     }
 
     @Override
+    public void registerFileManagerModules() {
+
+    }
+
+    @Override
     public void loadBaseCommands() {
-        baseCommands.add(new SellCommand(this));
+        baseSubCommands.add(new SellCommand(this));
     }
 
     @Override
