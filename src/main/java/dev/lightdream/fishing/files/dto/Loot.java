@@ -5,12 +5,14 @@ import dev.lightdream.api.dto.Item;
 import dev.lightdream.api.dto.Serializable;
 import dev.lightdream.api.utils.MessageBuilder;
 import dev.lightdream.fishing.Main;
+import lombok.NoArgsConstructor;
 import org.bukkit.Bukkit;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+@NoArgsConstructor
 public class Loot extends Serializable implements java.io.Serializable {
 
     public String type;

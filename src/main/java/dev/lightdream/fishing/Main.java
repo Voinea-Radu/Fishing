@@ -29,7 +29,7 @@ public final class Main extends LightDreamPlugin {
 
     @Override
     public void onEnable() {
-        init("Fishing", "fish", "1.5");
+        init("Fishing", "fish", "1.6");
         instance = this;
 
         new EventManager(this);

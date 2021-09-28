@@ -46,7 +46,7 @@ public class EventManager implements Listener {
             put("fish", loot.fish == null ? "" : loot.fish.type.toString());
             put("rarity", loot.fish == null ? "" : loot.fish.rarity.toString());
         }}));
-        ItemStack is = user.getPlayer().getItemInHand();
+        //ItemStack is = user.getPlayer().getItemInHand();
         event.getHook().remove();
         //user.getPlayer().setItemInHand(null);
         //Bukkit.getScheduler().runTaskLater(plugin,()->user.getPlayer().setItemInHand(is),1);
