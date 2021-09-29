@@ -47,10 +47,11 @@ public class EventManager implements Listener {
             put("rarity", loot.fish == null ? "" : loot.fish.rarity.toString());
         }}));
         //ItemStack is = user.getPlayer().getItemInHand();
-        event.getHook().remove();
+        //event.getHook().remove();
         //user.getPlayer().setItemInHand(null);
         //Bukkit.getScheduler().runTaskLater(plugin,()->user.getPlayer().setItemInHand(is),1);
-        event.setCancelled(true);
+        //event.setCancelled(true);
+        event.getCaught().remove();
     }
 
 
