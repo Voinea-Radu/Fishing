@@ -2,7 +2,7 @@ package dev.lightdream.fishing;
 
 import dev.lightdream.api.API;
 import dev.lightdream.api.LightDreamPlugin;
-import dev.lightdream.api.conifgs.SQLConfig;
+import dev.lightdream.api.configs.SQLConfig;
 import dev.lightdream.api.databases.User;
 import dev.lightdream.api.managers.MessageManager;
 import dev.lightdream.fishing.commands.SellCommand;
@@ -29,7 +29,7 @@ public final class Main extends LightDreamPlugin {
 
     @Override
     public void onEnable() {
-        init("Fishing", "fish", "1.7");
+        init("Fishing", "fish", "1.8");
         instance = this;
 
         new EventManager(this);

@@ -1,6 +1,6 @@
 package dev.lightdream.fishing.files.config;
 
-public class Lang extends dev.lightdream.api.conifgs.Lang {
+public class Lang extends dev.lightdream.api.configs.Lang {
 
     public String invalidFish = "This is not a valid fish";
     public String soldFish = "You have sold your fish for %amount%";

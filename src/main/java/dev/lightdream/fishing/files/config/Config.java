@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class Config extends dev.lightdream.api.conifgs.Config {
+public class Config extends dev.lightdream.api.configs.Config {
 
     public List<Loot> lootTable = Arrays.asList(
             new Loot(new Item(XMaterial.STONE), Arrays.asList(100.0, 100.0, 100.0, 100.0)),

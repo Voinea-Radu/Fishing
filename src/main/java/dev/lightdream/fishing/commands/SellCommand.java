@@ -20,8 +20,8 @@ public class SellCommand extends SubCommand {
     }
 
     @Override
-    public void execute(CommandSender commandSender, List<String> list) {
-        User user = api.getDatabaseManager().getUser(commandSender);
+    public void execute(User user, List<String> list) {
+        //User user = api.getDatabaseManager().getUser(commandSender);
 
         if (user == null || user.getPlayer() == null || user.getPlayer().getItemInHand() == null) {
             return;
@@ -37,7 +37,7 @@ public class SellCommand extends SubCommand {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender commandSender, List<String> list) {
+    public List<String> onTabComplete(User commandSender, List<String> list) {
         return new ArrayList<>();
     }
 }
