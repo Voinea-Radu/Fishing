@@ -6,6 +6,7 @@ import dev.lightdream.api.databases.User;
 import dev.lightdream.api.utils.MessageBuilder;
 import dev.lightdream.fishing.Main;
 import dev.lightdream.fishing.files.dto.Fish;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,6 +25,10 @@ public class SellCommand extends SubCommand {
         //User user = api.getDatabaseManager().getUser(commandSender);
 
         if (user == null || user.getPlayer() == null || user.getPlayer().getItemInHand() == null) {
+            return;
+        }
+        if(user.getPlayer().getItemInHand()==null||user.getPlayer().getItemInHand().getType().equals(Material.AIR)){
+            api.getMessageManager().sendMessage(user, Main.instance.lang.invalidFish);
             return;
         }
         Fish fish = Fish.of(user.getPlayer().getItemInHand());
